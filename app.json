@@ -1,21 +1,23 @@
 {
   "expo": {
-    "name": "sedekahje",
+    "name": "SedekahJe",
     "slug": "sedekahje",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "icon": "./assets/images/sedekahje-logo.png",
+    "scheme": "sedekahje",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nrmnqdds.sedekahje"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/sedekahje-logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.nrmnqdds.sedekahje"
     },
     "web": {
       "bundler": "metro",
@@ -27,15 +29,29 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/sedekahje-logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-dev-client",
+        {
+          "launchMode": "most-recent"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "881ff1f5-b5f7-44a0-addd-489b8be72c54"
+      }
     }
   }
 }
