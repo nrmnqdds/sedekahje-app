@@ -6,7 +6,8 @@ A mobile app for SedekahJe, a platform for people to donate to their local mosqu
 🚧 **In Construction** 🚧
 -------------------------
 
-> [!NOTE] The app is still under heavy development. Please check back later for updates.
+> [!NOTE] 
+> The app is still under heavy development. Please check back later for updates.
 
 Get started
 -----------
