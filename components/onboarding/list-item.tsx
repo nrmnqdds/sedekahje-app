@@ -96,9 +96,15 @@ const ListItem = ({ item, index, x }: Props) => {
 					autoPlay
 				/>
 			</Animated.View>
-			<Animated.Text style={[styles.textItem, rnTextStyle]}>
-				{item.text}
-			</Animated.Text>
+			<View
+				style={{
+					paddingHorizontal: 20,
+				}}
+			>
+				<Animated.Text style={[styles.textItem, rnTextStyle]}>
+					{item.text}
+				</Animated.Text>
+			</View>
 		</View>
 	);
 };
