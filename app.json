@@ -36,9 +36,11 @@
         }
       ],
       [
-        "expo-dev-client",
+        "expo-build-properties",
         {
-          "launchMode": "most-recent"
+          "ios": {
+            "deploymentTarget": "15.4"
+          }
         }
       ]
     ],

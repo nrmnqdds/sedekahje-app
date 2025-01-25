@@ -1,10 +1,7 @@
-import { create } from "zustand";
-import {
-	createJSONStorage,
-	persist,
-	type StateStorage,
-} from "zustand/middleware";
 import { MMKV } from "react-native-mmkv";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+import { createMMKV } from "./mmkv";
 
 const storeName = "notification-store";
 
@@ -12,18 +9,7 @@ const mmkv = new MMKV({
 	id: storeName,
 });
 
-const mmkvStorage: StateStorage = {
-	setItem: (name, value) => {
-		return mmkv.set(name, value);
-	},
-	getItem: (name) => {
-		const value = mmkv.getString(name);
-		return value ?? null;
-	},
-	removeItem: (name) => {
-		return mmkv.delete(name);
-	},
-};
+const mmkvStorage = createMMKV(mmkv);
 
 interface NotificationStore {
 	showNotification: boolean;

@@ -1,7 +1,6 @@
 import * as Notification from "expo-notifications";
-import { useCallback } from "react";
 
-const initializeNotification = useCallback(async () => {
+const initializeNotification = async () => {
 	const { status } = await Notification.getPermissionsAsync();
 
 	if (status !== "granted") {
@@ -15,9 +14,9 @@ const initializeNotification = useCallback(async () => {
 			}),
 		});
 	}
-}, []);
+};
 
-const scheduleJumaatNotification = useCallback(async () => {
+const scheduleJumaatNotification = async () => {
 	const identifier = await Notification.scheduleNotificationAsync({
 		content: {
 			title: "Jumaat Mubarak!",
@@ -32,12 +31,12 @@ const scheduleJumaatNotification = useCallback(async () => {
 	});
 
 	return identifier;
-}, []);
+};
 
-const cancelScheduledNotification = useCallback(async (identifier: string) => {
+const cancelScheduledNotification = async (identifier: string) => {
 	if (!identifier) return;
 	await Notification.cancelScheduledNotificationAsync(identifier);
-}, []);
+};
 
 export {
 	initializeNotification,

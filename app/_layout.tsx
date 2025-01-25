@@ -24,7 +24,11 @@ export default function RootLayout() {
 
 	return (
 		<NotificationProvider>
-			<Stack />
+			<Stack
+				screenOptions={{
+					headerShown: false,
+				}}
+			/>
 		</NotificationProvider>
 	);
 }
