@@ -30,6 +30,7 @@
     "expo-symbols": "~0.2.1",
     "expo-system-ui": "~4.0.7",
     "expo-web-browser": "~14.0.2",
+    "lottie-react-native": "7.1.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.6",
@@ -41,13 +42,13 @@
     "react-native-screenshot-aware": "^1.0.6",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "zustand": "^5.0.3",
-    "lottie-react-native": "7.1.0"
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@biomejs/biome": "1.9.4",
     "@types/react": "~18.3.12",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "private": true
