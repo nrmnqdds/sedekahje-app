@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { useNotification } from "@/hooks/use-notification";
+import {
+	useNotification,
+	useNotificationObserver,
+} from "@/hooks/use-notification";
 import {
 	initializeNotification,
 	scheduleJumaatNotification,
@@ -11,6 +14,7 @@ export const NotificationProvider = ({
 	children,
 }: { children: React.ReactNode }) => {
 	const { setNotificationIdentifier, showNotification } = useNotification();
+	useNotificationObserver();
 
 	useEffect(() => {
 		(async () => {
