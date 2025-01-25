@@ -13,12 +13,12 @@ export const NotificationProvider = ({
 	const { setNotificationIdentifier, showNotification } = useNotification();
 
 	useEffect(() => {
-		async () => {
+		(async () => {
 			if (!showNotification) return;
 			const identifier = await scheduleJumaatNotification();
 			setNotificationIdentifier(identifier);
-		};
+		})();
 	}, [setNotificationIdentifier, showNotification]);
 
-	return <>{children}</>;
+	return children;
 };
