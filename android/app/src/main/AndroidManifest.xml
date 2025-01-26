@@ -26,6 +26,7 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="sedekahje"/>
         <data android:scheme="com.nrmnqdds.sedekahje"/>
+        <data android:scheme="exp+sedekahje"/>
       </intent-filter>
     </activity>
   </application>

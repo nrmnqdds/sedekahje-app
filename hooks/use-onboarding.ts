@@ -12,17 +12,17 @@ const mmkv = new MMKV({
 const mmkvStorage = createMMKV(mmkv);
 
 interface OnboardingStore {
-	onboarded: boolean;
+	isOnboarded: boolean;
 	setOnboarded: (onboarded: boolean) => void;
 }
 
 export const useOnboarding = create(
 	persist<OnboardingStore>(
 		(set) => ({
-			onboarded: false,
+			isOnboarded: false,
 			setOnboarded: (newOnboarded) => {
 				set({
-					onboarded: newOnboarded,
+					isOnboarded: newOnboarded,
 				});
 			},
 		}),

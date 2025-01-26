@@ -1,17 +1,13 @@
-import { View } from "react-native";
 import OnboardingScreen from "./onboarding";
+import useOnboarding from "@/hooks/use-onboarding";
+import { Redirect } from "expo-router";
 
 export default function Index() {
-	return (
-		<View
-			style={{
-				flex: 1,
-				justifyContent: "center",
-				alignItems: "center",
-				backgroundColor: "#fff",
-			}}
-		>
-			<OnboardingScreen />
-		</View>
+	const { isOnboarded } = useOnboarding();
+
+	return isOnboarded ? (
+		<Redirect href="/(app)/(tabs)/home" />
+	) : (
+		<OnboardingScreen />
 	);
 }

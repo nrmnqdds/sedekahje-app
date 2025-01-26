@@ -1,59 +1,65 @@
 {
-  "expo": {
-    "name": "SedekahJe",
-    "slug": "sedekahje",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/sedekahje-logo.png",
-    "scheme": "sedekahje",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.nrmnqdds.sedekahje"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/sedekahje-logo.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.nrmnqdds.sedekahje"
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/sedekahje-logo.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ],
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "deploymentTarget": "15.4"
-          }
-        }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "881ff1f5-b5f7-44a0-addd-489b8be72c54"
-      }
-    }
-  }
+	"expo": {
+		"name": "SedekahJe",
+		"slug": "sedekahje",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/images/sedekahje-logo.png",
+		"scheme": "sedekahje",
+		"userInterfaceStyle": "automatic",
+		"newArchEnabled": true,
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "com.nrmnqdds.sedekahje"
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/images/sedekahje-logo.png",
+				"backgroundColor": "#ffffff"
+			},
+			"package": "com.nrmnqdds.sedekahje"
+		},
+		"web": {
+			"bundler": "metro",
+			"output": "static",
+			"favicon": "./assets/images/favicon.png"
+		},
+		"plugins": [
+			"expo-router",
+			[
+				"expo-splash-screen",
+				{
+					"image": "./assets/images/sedekahje-logo.png",
+					"imageWidth": 200,
+					"resizeMode": "contain",
+					"backgroundColor": "#ffffff"
+				}
+			],
+			[
+				"expo-build-properties",
+				{
+					"ios": {
+						"deploymentTarget": "15.4"
+					}
+				}
+			],
+			[
+				"expo-dev-client",
+				{
+					"launchMode": "most-recent"
+				}
+			]
+		],
+		"experiments": {
+			"typedRoutes": true
+		},
+		"extra": {
+			"router": {
+				"origin": false
+			},
+			"eas": {
+				"projectId": "881ff1f5-b5f7-44a0-addd-489b8be72c54"
+			}
+		}
+	}
 }

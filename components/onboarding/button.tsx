@@ -8,6 +8,7 @@ import Animated, {
 	withTiming,
 } from "react-native-reanimated";
 import useOnboarding from "@/hooks/use-onboarding";
+import { router } from "expo-router";
 
 type Props = {
 	currentIndex: SharedValue<number>;
@@ -59,6 +60,7 @@ const Button = ({ currentIndex, length, flatListRef }: Props) => {
 			console.log("Get Started");
 
 			setOnboarded(true);
+			router.replace("/(app)/(tabs)/home");
 			return;
 		}
 		flatListRef?.current?.scrollToIndex({
