@@ -28,7 +28,9 @@ export const useTheme = create(
 			setTheme: (newTheme) => {
 				set({
 					theme: newTheme,
-          isDarkMode: newTheme === "dark" || (newTheme === "system" && Appearance.getColorScheme() === "dark"),
+					isDarkMode:
+						newTheme === "dark" ||
+						(newTheme === "system" && Appearance.getColorScheme() === "dark"),
 				});
 			},
 		}),
@@ -38,5 +40,3 @@ export const useTheme = create(
 		},
 	),
 );
-
-export default useTheme;

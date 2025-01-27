@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, View, Text, StyleSheet, Pressable } from "react-native";
-import useTheme from "@/hooks/use-theme";
+import { useTheme } from "@/hooks/use-theme";
 import { router, Tabs } from "expo-router";
 import * as Application from "expo-application";
 import { colors } from "@/constants/colors";

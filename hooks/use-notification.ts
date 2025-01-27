@@ -54,7 +54,7 @@ export const useNotificationObserver = () => {
 				router.push(url);
 			}
 
-			router.push("/(app)/home");
+			router.push("/(app)/(tabs)/home");
 		}
 
 		Notifications.getLastNotificationResponseAsync().then((response) => {

@@ -6,7 +6,7 @@ import {
 	TouchableOpacity,
 	Pressable,
 } from "react-native";
-import useTheme from "@/hooks/use-theme";
+import { useTheme } from "@/hooks/use-theme";
 import { router, Stack } from "expo-router";
 import { colors } from "@/constants/colors";
 import Feather from "@expo/vector-icons/Feather";

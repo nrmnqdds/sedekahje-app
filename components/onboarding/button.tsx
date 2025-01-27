@@ -7,7 +7,7 @@ import Animated, {
 	withSpring,
 	withTiming,
 } from "react-native-reanimated";
-import useOnboarding from "@/hooks/use-onboarding";
+import { useOnboarding } from "@/hooks/use-onboarding";
 import { router } from "expo-router";
 
 type Props = {

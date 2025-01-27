@@ -32,5 +32,3 @@ export const useOnboarding = create(
 		},
 	),
 );
-
-export default useOnboarding;
