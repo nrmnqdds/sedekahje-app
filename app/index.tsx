@@ -1,5 +1,5 @@
 import OnboardingScreen from "./onboarding";
-import useOnboarding from "@/hooks/use-onboarding";
+import { useOnboarding } from "@/hooks/use-onboarding";
 import { Redirect } from "expo-router";
 
 export default function Index() {

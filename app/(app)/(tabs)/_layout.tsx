@@ -1,7 +1,7 @@
 import React from "react";
 import Feather from "@expo/vector-icons/Feather";
 import { Tabs } from "expo-router";
-import useTheme from "@/hooks/use-theme";
+import { useTheme } from "@/hooks/use-theme";
 import { colors } from "@/constants/colors";
 
 const AppLayout = () => {
