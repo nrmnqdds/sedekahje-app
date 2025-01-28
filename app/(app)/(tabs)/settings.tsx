@@ -12,10 +12,17 @@ export default function SettingScreen() {
 	const styles = !isDarkMode ? lightStyle : darkStyle;
 
 	return (
-		<ScrollView style={styles.background}>
+		<ScrollView
+			overScrollMode="never"
+			bounces={false}
+			alwaysBounceVertical={false}
+			contentContainerStyle={styles.background}
+		>
 			<Tabs.Screen
 				options={{
-					headerTintColor: isDarkMode ? colors.neutral[50] : colors.cyan[50],
+					headerTintColor: isDarkMode
+						? colors.neutral[50]
+						: colors.neutral[900],
 					headerStyle: {
 						backgroundColor: isDarkMode
 							? colors.neutral[950]
@@ -34,9 +41,20 @@ export default function SettingScreen() {
 								: colors.neutral[200],
 						},
 					]}
-					onPress={() => router.push("/(app)/(stack)/change-theme")}
+					onPress={() => router.push("/(app)/(stack)/appearance")}
 				>
 					<Text style={styles.text}>Appearance</Text>
+					<Feather
+						name="arrow-right"
+						size={24}
+						color={isDarkMode ? colors.neutral[50] : colors.neutral[900]}
+					/>
+				</Pressable>
+				<Pressable
+					style={styles.row}
+					onPress={() => router.push("/(app)/(stack)/faq")}
+				>
+					<Text style={styles.text}>FAQ</Text>
 					<Feather
 						name="arrow-right"
 						size={24}
@@ -58,9 +76,6 @@ const lightStyle = StyleSheet.create({
 		backgroundColor: colors.neutral[50],
 		paddingVertical: 20,
 		paddingHorizontal: 14,
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
 	},
 	row: {
 		display: "flex",
