@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
 	useNotification,
 	useNotificationObserver,
@@ -6,7 +5,8 @@ import {
 import {
 	initializeNotification,
 	scheduleJumaatNotification,
-} from "@/lib/notification";
+} from "@/utils/notification";
+import { useEffect } from "react";
 
 initializeNotification();
 
