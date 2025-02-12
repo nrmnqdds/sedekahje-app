@@ -1,12 +1,11 @@
+import type { Theme } from "@/types/theme.types";
+import { Appearance } from "react-native";
+import { MMKV } from "react-native-mmkv";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { MMKV } from "react-native-mmkv";
 import { createMMKV } from "./mmkv";
-import { Appearance, type ColorSchemeName } from "react-native";
 
 const storeName = "theme-store";
-
-type Theme = NonNullable<ColorSchemeName> | "system";
 
 const mmkv = new MMKV({
 	id: storeName,

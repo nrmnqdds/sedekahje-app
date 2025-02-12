@@ -1,8 +1,8 @@
-import React from "react";
+import { colors } from "@/constants/colors";
+import { useTheme } from "@/hooks/use-theme";
 import Feather from "@expo/vector-icons/Feather";
 import { Tabs } from "expo-router";
-import { useTheme } from "@/hooks/use-theme";
-import { colors } from "@/constants/colors";
+import React from "react";
 
 const AppLayout = () => {
 	const { isDarkMode } = useTheme();

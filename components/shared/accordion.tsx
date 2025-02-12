@@ -1,5 +1,8 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { colors } from "@/constants/colors";
+import { useTheme } from "@/hooks/use-theme";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React, { useMemo, useState } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import Animated, {
 	FadeInUp,
 	FadeOutUp,
@@ -7,9 +10,6 @@ import Animated, {
 	useAnimatedStyle,
 	withSpring,
 } from "react-native-reanimated";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { useTheme } from "@/hooks/use-theme";
-import { colors } from "@/constants/colors";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -20,7 +20,7 @@ const layout = LinearTransition.springify().damping(damping);
 
 const AnimatedIcon = Animated.createAnimatedComponent(FontAwesome5);
 
-const borderRadius = 24;
+const borderRadius = 20;
 
 interface AccordionProps {
 	title: string;
@@ -100,13 +100,15 @@ const Item = ({
 					{/* {item.icon} */}
 					<Text style={styles.title}>{item.title}</Text>
 				</View>
-				<AnimatedIcon
-					// @ts-ignore
-					name={"chevron-up"}
-					size={20}
-					color="#8F8F9A"
-					style={iconStyle}
-				/>
+				<View>
+					<AnimatedIcon
+						// @ts-ignore
+						name={"chevron-up"}
+						size={20}
+						color="#8F8F9A"
+						style={iconStyle}
+					/>
+				</View>
 			</View>
 			{isSelected && (
 				<Animated.View

@@ -1,22 +1,40 @@
-import React from "react";
-import { ScrollView, View, Text, StyleSheet, Pressable } from "react-native";
-import { useTheme } from "@/hooks/use-theme";
-import { router, Tabs } from "expo-router";
-import * as Application from "expo-application";
+import BottomSheet, {
+	type BottomSheetMethods,
+} from "@/components/theme/bottom-sheet";
+import Button from "@/components/theme/button";
 import { colors } from "@/constants/colors";
-import Feather from "@expo/vector-icons/Feather";
+import { useTheme } from "@/hooks/use-theme";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import * as Application from "expo-application";
+import { Tabs, router } from "expo-router";
+import { useRef } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import Animated, {
+	useAnimatedStyle,
+	withTiming,
+} from "react-native-reanimated";
 
 export default function SettingScreen() {
-	const { isDarkMode } = useTheme();
+	const { isDarkMode, setTheme, theme } = useTheme();
 
 	const styles = !isDarkMode ? lightStyle : darkStyle;
 
+	const backgroundColorAnimation = useAnimatedStyle(() => {
+		return {
+			backgroundColor: isDarkMode
+				? withTiming(colors.neutral[950])
+				: withTiming(colors.neutral[50]),
+		};
+	});
+
+	const bottomSheetRef = useRef<BottomSheetMethods>(null);
+
 	return (
-		<ScrollView
+		<Animated.ScrollView
 			overScrollMode="never"
 			bounces={false}
 			alwaysBounceVertical={false}
-			contentContainerStyle={styles.background}
+			contentContainerStyle={[styles.background, backgroundColorAnimation]}
 		>
 			<Tabs.Screen
 				options={{
@@ -30,43 +48,51 @@ export default function SettingScreen() {
 					},
 				}}
 			/>
-			<View style={styles.container}>
+			<View
+				style={{
+					gap: 5,
+				}}
+			>
+				<Button bottomSheetRef={bottomSheetRef} isDarkMode={isDarkMode} />
 				<Pressable
-					style={[
-						styles.row,
-						{
-							borderBottomWidth: 1,
-							borderBottomColor: isDarkMode
-								? colors.neutral[800]
-								: colors.neutral[200],
-						},
-					]}
-					onPress={() => router.push("/(app)/(stack)/appearance")}
-				>
-					<Text style={styles.text}>Appearance</Text>
-					<Feather
-						name="arrow-right"
-						size={24}
-						color={isDarkMode ? colors.neutral[50] : colors.neutral[900]}
-					/>
-				</Pressable>
-				<Pressable
-					style={styles.row}
+					style={styles.container}
 					onPress={() => router.push("/(app)/(stack)/faq")}
 				>
-					<Text style={styles.text}>FAQ</Text>
-					<Feather
-						name="arrow-right"
+					<FontAwesome
+						name="question"
 						size={24}
 						color={isDarkMode ? colors.neutral[50] : colors.neutral[900]}
 					/>
+					<Text
+						style={[
+							styles.text,
+							{
+								fontSize: 16,
+								fontWeight: "500",
+							},
+						]}
+					>
+						FAQ
+					</Text>
 				</Pressable>
+				<View
+					style={{
+						alignItems: "center",
+					}}
+				>
+					<Text style={styles.text}>
+						SedekahJe v{Application.nativeApplicationVersion} &copy;{" "}
+						{new Date().getFullYear()} DevTalk MY
+					</Text>
+				</View>
 			</View>
-			<Text style={styles.text}>
-				SedekahJe v{Application.nativeApplicationVersion} &copy;{" "}
-				{new Date().getFullYear()} DevTalk MY
-			</Text>
-		</ScrollView>
+			<BottomSheet
+				ref={bottomSheetRef}
+				setTheme={setTheme}
+				isDarkMode={isDarkMode}
+				themeSwitch={theme}
+			/>
+		</Animated.ScrollView>
 	);
 }
 
@@ -77,16 +103,14 @@ const lightStyle = StyleSheet.create({
 		paddingVertical: 20,
 		paddingHorizontal: 14,
 	},
-	row: {
+	container: {
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		padding: 10,
-	},
-	container: {
+		padding: 20,
 		backgroundColor: colors.neutral[100],
-		borderRadius: 10,
+		borderRadius: 20,
 	},
 	text: {
 		color: colors.black,
@@ -97,19 +121,17 @@ const darkStyle = StyleSheet.create({
 	background: {
 		flex: 1,
 		backgroundColor: colors.neutral[950],
-		paddingVertical: 10,
+		paddingVertical: 20,
 		paddingHorizontal: 14,
 	},
-	row: {
+	container: {
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		padding: 10,
-	},
-	container: {
+		padding: 20,
 		backgroundColor: colors.neutral[900],
-		borderRadius: 10,
+		borderRadius: 20,
 	},
 	text: {
 		color: colors.neutral[50],
