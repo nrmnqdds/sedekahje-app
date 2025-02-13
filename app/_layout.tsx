@@ -1,4 +1,6 @@
 import { NotificationProvider } from "@/providers/notification-provider";
+import { initDatabase } from "@/utils/database";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -9,6 +11,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+const queryClient = new QueryClient();
+
 export default function RootLayout() {
 	const [loaded] = useFonts({
 		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -16,7 +20,9 @@ export default function RootLayout() {
 
 	useEffect(() => {
 		if (loaded) {
-			SplashScreen.hideAsync();
+			initDatabase().finally(() => {
+				SplashScreen.hideAsync();
+			});
 		}
 	}, [loaded]);
 
@@ -25,16 +31,18 @@ export default function RootLayout() {
 	}
 
 	return (
-		<NotificationProvider>
-			<GestureHandlerRootView style={{ flex: 1 }}>
-				<SafeAreaProvider>
-					<Stack
-						screenOptions={{
-							headerShown: false,
-						}}
-					/>
-				</SafeAreaProvider>
-			</GestureHandlerRootView>
-		</NotificationProvider>
+		<QueryClientProvider client={queryClient}>
+			<NotificationProvider>
+				<GestureHandlerRootView style={{ flex: 1 }}>
+					<SafeAreaProvider>
+						<Stack
+							screenOptions={{
+								headerShown: false,
+							}}
+						/>
+					</SafeAreaProvider>
+				</GestureHandlerRootView>
+			</NotificationProvider>
+		</QueryClientProvider>
 	);
 }

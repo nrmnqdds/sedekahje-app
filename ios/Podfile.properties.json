@@ -5,5 +5,7 @@
   "ios.deploymentTarget": "15.4",
   "apple.extraPods": "[]",
   "apple.ccacheEnabled": "false",
-  "apple.privacyManifestAggregationEnabled": "true"
+  "apple.privacyManifestAggregationEnabled": "true",
+  "expo.sqlite.enableFTS": "true",
+  "expo.sqlite.useSQLCipher": "true"
 }

@@ -60,7 +60,7 @@ const Button = ({ currentIndex, length, flatListRef }: Props) => {
 			console.log("Get Started");
 
 			setOnboarded(true);
-			router.replace("/(app)/(tabs)/home");
+			router.replace("/(app)/(tabs)");
 			return;
 		}
 		flatListRef?.current?.scrollToIndex({
