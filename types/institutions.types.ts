@@ -16,7 +16,7 @@ export const categories = {
 
 export type Category = keyof typeof categories;
 
-export type Institution = {
+export interface IInstitution {
 	id: number;
 	name: string;
 	description?: string;
@@ -27,7 +27,7 @@ export type Institution = {
 	qrContent?: string;
 	supportedPayment?: PaymentOption[];
 	coords?: [number, number];
-};
+}
 
 export enum CategoryColor {
 	mosque = "blue",

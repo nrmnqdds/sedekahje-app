@@ -1,59 +1,99 @@
-import { ListItem } from "@/components/shared/list-item";
+import QrCodeDisplay from "@/components/shared/qrcode-display";
 import { colors } from "@/constants/colors";
+import { screenWidth } from "@/constants/size";
+import { useInstitutions } from "@/hooks/use-institutions";
 import { useTheme } from "@/hooks/use-theme";
+import { LegendList } from "@legendapp/list";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
 	ActivityIndicator,
-	Dimensions,
-	FlatList,
+	Image,
+	RefreshControl,
 	StyleSheet,
 	Text,
 	View,
-	type ViewToken,
 } from "react-native";
-
-import { useSharedValue } from "react-native-reanimated";
-
-const data = new Array(200).fill(0).map((_, index) => ({ id: index }));
 
 export default function HomeScreen() {
 	const { isDarkMode } = useTheme();
-	const { width: screenWidth } = Dimensions.get("screen");
-	const query = useQuery({
+	const { institutions, lastFetched, fetchInstitutions, isFetching, isError } =
+		useInstitutions();
+
+	const [refreshing, setRefreshing] = useState(false);
+	const [randomized, setRandomized] = useState(institutions);
+
+	useEffect(() => {
+		setRandomized([...institutions].sort(() => Math.random() - 0.5));
+	}, [institutions]);
+
+	const onRefresh = useCallback(async () => {
+		setRefreshing(true);
+		setRandomized([...institutions].sort(() => Math.random() - 0.5));
+		setRefreshing(false);
+	}, [institutions]);
+
+	useQuery({
 		queryKey: ["institutions"],
-		queryFn: async () => {
-			const response = await fetch("https://sedekah.je/api/institutions");
-			return await response.json();
-		},
+		queryFn: fetchInstitutions,
+		enabled:
+			!institutions ||
+			institutions.length === 0 ||
+			new Date().getTime() - new Date(lastFetched).getTime() >
+				7 * 24 * 60 * 60 * 1000,
 	});
 
 	const styles = !isDarkMode ? lightStyle : darkStyle;
 
-	const viewableItems = useSharedValue<ViewToken[]>([]);
-
 	return (
 		<View style={styles.background}>
-			{query.isLoading ? (
+			{isFetching ? (
 				<ActivityIndicator size="large" color={colors.cyan[500]} />
-			) : query.isError ? (
+			) : isError ? (
 				<Text>Failed to fetch data</Text>
 			) : (
-				<FlatList
-					data={query.data}
+				<LegendList
+					data={randomized}
 					horizontal={false}
 					keyExtractor={(item) => item.id.toString()}
 					contentContainerStyle={{
-						paddingTop: 40,
 						width: screenWidth,
 					}}
-					onViewableItemsChanged={({ viewableItems: vItems }) => {
-						viewableItems.value = vItems;
-					}}
-					numColumns={2}
-					columnWrapperStyle={{ justifyContent: "space-between" }} // causes items to be equally spaced
-					renderItem={({ item }) => {
-						return <ListItem item={item} viewableItems={viewableItems} />;
+					// numColumns={2}
+					estimatedItemSize={30}
+					refreshControl={
+						<RefreshControl
+							refreshing={refreshing}
+							onRefresh={onRefresh}
+							tintColor={colors.cyan[500]}
+							colors={[colors.cyan[500]]}
+						/>
+					}
+					renderItem={({ index, item }) => {
+						return (
+							<View
+								key={index}
+								style={{
+									// width: screenWidth / 2 - 5,
+									backgroundColor: colors.cyan[500],
+									alignSelf: "center",
+									borderRadius: 15,
+									marginTop: 20,
+								}}
+							>
+								{item.qrContent ? (
+									<QrCodeDisplay
+										qrContent={item.qrContent}
+										supportedPayment={item.supportedPayment}
+									/>
+								) : (
+									<Image
+										source={{ uri: item.qrImage }}
+										style={{ width: 100, height: 100 }}
+									/>
+								)}
+							</View>
+						);
 					}}
 				/>
 			)}

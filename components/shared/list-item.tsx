@@ -1,5 +1,6 @@
-import React from "react";
-import { Dimensions, StyleSheet, type ViewToken } from "react-native";
+import type { IInstitution } from "@/types/institutions.types";
+import { memo } from "react";
+import { Dimensions, StyleSheet, Text, type ViewToken } from "react-native";
 import Animated, {
 	useAnimatedStyle,
 	withTiming,
@@ -8,39 +9,37 @@ import Animated, {
 
 type ListItemProps = {
 	viewableItems: SharedValue<ViewToken[]>;
-	item: {
-		id: number;
-	};
+	item: IInstitution;
 };
 
-const ListItem: React.FC<ListItemProps> = React.memo(
-	({ item, viewableItems }) => {
-		const rStyle = useAnimatedStyle(() => {
-			const isVisible = Boolean(
-				viewableItems.value
-					.filter((item) => item.isViewable)
-					.find((viewableItem) => viewableItem.item.id === item.id),
-			);
-
-			return {
-				opacity: withTiming(isVisible ? 1 : 0),
-				transform: [
-					{
-						scale: withTiming(isVisible ? 1 : 0.6),
-					},
-				],
-			};
-		}, []);
-
-		const { width: screenWidth } = Dimensions.get("screen");
-
-		return (
-			<Animated.View
-				style={[styles.listItem, rStyle, { width: screenWidth / 2 - 5 }]}
-			/>
+const ListItem = memo<ListItemProps>(({ item, viewableItems }) => {
+	const rStyle = useAnimatedStyle(() => {
+		const isVisible = Boolean(
+			viewableItems.value
+				.filter((item) => item.isViewable)
+				.find((viewableItem) => viewableItem.item.id === item.id),
 		);
-	},
-);
+
+		return {
+			opacity: withTiming(isVisible ? 1 : 0),
+			transform: [
+				{
+					scale: withTiming(isVisible ? 1 : 0.6),
+				},
+			],
+		};
+	}, []);
+
+	const { width: screenWidth } = Dimensions.get("screen");
+
+	return (
+		<Animated.View
+			style={[styles.listItem, rStyle, { width: screenWidth / 2 - 5 }]}
+		>
+			<Text>{item.name}</Text>
+		</Animated.View>
+	);
+});
 
 const styles = StyleSheet.create({
 	listItem: {

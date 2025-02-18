@@ -6,7 +6,7 @@ import { colors } from "@/constants/colors";
 import { useTheme } from "@/hooks/use-theme";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as Application from "expo-application";
-import { Tabs, router } from "expo-router";
+import { router } from "expo-router";
 import { useRef } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Animated, {
@@ -36,18 +36,6 @@ export default function SettingScreen() {
 			alwaysBounceVertical={false}
 			contentContainerStyle={[styles.background, backgroundColorAnimation]}
 		>
-			<Tabs.Screen
-				options={{
-					headerTintColor: isDarkMode
-						? colors.neutral[50]
-						: colors.neutral[900],
-					headerStyle: {
-						backgroundColor: isDarkMode
-							? colors.neutral[950]
-							: colors.neutral[50],
-					},
-				}}
-			/>
 			<View
 				style={{
 					gap: 5,

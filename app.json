@@ -55,14 +55,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
-        }
-      ],
-      [
-        "expo-sqlite",
-        {
-          "enableFTS": true,
-          "useSQLCipher": true
+          "locationAlwaysAndWhenInUsePermission": "Allow SedekahJe to use your location."
         }
       ]
     ],

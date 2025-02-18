@@ -1,5 +1,4 @@
 import { NotificationProvider } from "@/providers/notification-provider";
-import { initDatabase } from "@/utils/database";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -20,9 +19,7 @@ export default function RootLayout() {
 
 	useEffect(() => {
 		if (loaded) {
-			initDatabase().finally(() => {
-				SplashScreen.hideAsync();
-			});
+			SplashScreen.hideAsync();
 		}
 	}, [loaded]);
 
